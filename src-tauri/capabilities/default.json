@@ -15,7 +15,12 @@
     "fs:read-dirs",
     {
       "identifier": "fs:scope",
-      "allow": [{ "path": "$DOCUMENT/**/**" }]
-    }
+      "allow": [
+        {
+          "path": "$DOCUMENT/**/**"
+        }
+      ]
+    },
+    "dialog:default"
   ]
 }

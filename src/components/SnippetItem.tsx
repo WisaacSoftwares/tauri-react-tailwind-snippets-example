@@ -4,6 +4,7 @@ import { cn } from "../utils/classes";
 import { join } from "@tauri-apps/api/path";
 import toast from "react-hot-toast";
 import { MdClose, MdDelete } from "react-icons/md";
+import {ask} from '@tauri-apps/plugin-dialog'
 
 interface Props {
   snippetName: string;
@@ -13,7 +14,11 @@ function SnippetItem({ snippetName }: Props) {
   const { setSelectedSnippet, selectedSnippet, removeSnippetName } = useSnippetStore();
 
   const handleDelete = async () => {
-    const accept = await window.confirm('Are you sure you want to delete this snippet?');
+    // const accept = await window.confirm('Are you sure you want to delete this snippet?');
+    const accept = await ask(`Are you sure you want to delete "${snippetName}" snippet?`, {
+      title: 'Delete Snippet',
+      kind: 'warning',
+    });
 
     if (!accept) return;
 
@@ -22,6 +27,7 @@ function SnippetItem({ snippetName }: Props) {
       baseDir: BaseDirectory.Document
     });
     removeSnippetName(snippetName);
+    if (selectedSnippet?.name === snippetName) setSelectedSnippet(null);
 
     toast.success("Snippet deleted");
   }

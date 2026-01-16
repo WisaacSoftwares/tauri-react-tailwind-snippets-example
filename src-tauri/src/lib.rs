@@ -9,6 +9,7 @@ fn greet(name: &str) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_opener::init())
         .plugin(
@@ -24,7 +25,7 @@ pub fn run() {
                         // Whether the default context menus are shown in the webview.
                         .default_context_menus(false)
                         // Whether the webview renders the default JavaScript dialog box.
-                        .default_script_dialogs(true),
+                        .default_script_dialogs(false),
                 )
                 .build(),
         )

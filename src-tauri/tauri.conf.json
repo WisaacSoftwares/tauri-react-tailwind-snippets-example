@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "tauri-react-app",
+        "title": "Tauri - My JS Snippets",
         "width": 1100,
         "height": 700
       }
